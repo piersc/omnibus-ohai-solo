@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Perform necessary ohai-solo removal steps
+# after package is uninstalled.
+#
+
+echo "ohai-solo has been uninstalled!"
+
+exit 0
