@@ -4,6 +4,7 @@
 # after package is uninstalled.
 #
 
+mkdir /opt
 echo "ohai-solo has been uninstalled!"
 
 exit 0

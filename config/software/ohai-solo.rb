@@ -50,7 +50,9 @@ env =
 build do
 
   # Remove the Chef plugins so we don't have to install Chef
-  command "rm #{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb"
+  
+  command "rm #{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb" if File.exists?("#{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb")
+  command "cp /vagrant/plugins/* #{source_dir}/ohai-solo/lib/ohai/plugins/"
 
   gem ["install ohai",
       "-n #{install_dir}/bin",

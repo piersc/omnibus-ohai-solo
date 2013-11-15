@@ -22,6 +22,6 @@ cp -R $INSTALLER_DIR $DEST_DIR || error_exit "Cannot install to $DEST_DIR"
 rm -f $DEST_DIR/$PROGNAME
 
 # You may want to symlink your packages bin files into /usr/bin
-# ln -sf $DEST_DIR/bin/ohai-solo /usr/bin || error_exit "Cannot link ohai-solo to /usr/bin"
+ln -sf $DEST_DIR/bin/ohai /usr/bin/ohai-solo || error_exit "Cannot link ohai-solo to /usr/bin"
 
 exit 0
