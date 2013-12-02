@@ -10,7 +10,7 @@ end
 
 dependency "bundler"
 
-version ENV["OHAI_GIT_REV"] || "master"
+version "e5d69208af15ee84b702e8dcdcabf32996440eae"
 
 source :git => "git://github.com/opscode/ohai"
 
@@ -52,9 +52,11 @@ build do
   # Remove the Chef plugins so we don't have to install Chef
   
   command "rm #{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb" if File.exists?("#{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb")
-  command "cp /vagrant/plugins/* #{source_dir}/ohai-solo/lib/ohai/plugins/"
+  command "cp /opt/omnibus-ohai-solo/plugins/* #{source_dir}/ohai-solo/lib/ohai/plugins/"
 
-  gem ["install ohai",
+  gem "build ohai.gemspec"
+
+  gem ["install ./ohai*.gem",
       "-n #{install_dir}/bin",
       "--no-rdoc --no-ri"].join(" "), :env => env.merge({"PATH" => "#{install_dir}/embedded/bin:#{ENV['PATH']}"})
 
