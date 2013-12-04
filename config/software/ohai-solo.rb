@@ -52,7 +52,7 @@ build do
   # Remove the Chef plugins so we don't have to install Chef
   
   command "rm #{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb" if File.exists?("#{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb")
-  command "cp /opt/omnibus-ohai-solo/plugins/* #{source_dir}/ohai-solo/lib/ohai/plugins/"
+  command "cp /opt/ohai-plugins/plugins/* #{source_dir}/ohai-solo/lib/ohai/plugins/"
 
   gem "build ohai.gemspec"
 
