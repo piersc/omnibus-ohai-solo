@@ -8,6 +8,7 @@ if Vagrant::VERSION < "1.2.1"
 end
 
 host_project_path = File.expand_path("..", __FILE__)
+plugins_path = File.expand_path("./plugins")
 guest_project_path = "/home/vagrant/#{File.basename(host_project_path)}"
 project_name = "ohai-solo"
 
@@ -66,10 +67,8 @@ Vagrant.configure("2") do |config|
   config.ssh.timeout   = 120
   config.ssh.forward_agent = true
 
-  host_project_path = File.expand_path("..", __FILE__)
-  guest_project_path = "/home/vagrant/#{File.basename(host_project_path)}"
-
   config.vm.synced_folder host_project_path, guest_project_path
+  config.vm.synced_folder plugins_path, "/opt/ohai-plugins"
 
   # prepare VM to be an Omnibus builder
   config.vm.provision :chef_solo do |chef|
