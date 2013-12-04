@@ -1,0 +1,31 @@
+---
+driver_plugin: rackspace
+driver_config:
+  require_chef_omnibus: latest
+  rackspace_username: <%= ENV['RS_USERNAME'] %>
+  rackspace_api_key: <%= ENV['RS_APIKEY'] %>
+  test_base_path: /opt/build
+  public_key_path: <%= ENV['SSH_KEY_FILE'] %>
+  flavor_id: <%= ENV['RS_FLAVOR'] %>
+  rackspace_region: <%= ENV['RS_REGION'] %>
+
+platforms:
+- name: ubuntu-1204
+  driver_config:
+    image_id: 80fbcb55-b206-41f9-9bc2-2dd7aac6c061
+- name: ubuntu-1004
+  driver_config:
+    image_id: aab63bcf-89aa-440f-b0c7-c7a1c611914b
+- name: centos-6
+  driver_config:
+    image_id: f70ed7c7-b42e-4d77-83d8-40fa29825b85
+- name: centos-5
+  driver_config:
+    image_id: 9522c27d-51d9-44ee-8eb3-fb7b14fd4042
+
+suites:
+- name: ohai-solo
+  run_list:
+    - recipe[omnibus::default]
+    - recipe[omnibus_ohai_solo::default]
+  attributes: {}
