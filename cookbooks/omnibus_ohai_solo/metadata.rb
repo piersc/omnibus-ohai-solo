@@ -7,3 +7,5 @@ description      'Builds ohai-solo packages using omnibus'
 version          '0.0.1'
 
 depends "omnibus"
+depends "rackspacecloud"
+depends "xml"

@@ -28,6 +28,12 @@ suites:
   run_list:
     - recipe[omnibus::default]
     - recipe[omnibus_ohai_solo::default]
+    - recipe[omnibus_ohai_solo::upload]
   attributes:
     omnibus:
       ruby_version: "1.9.3-p484"
+    omnibus_ohai_solo:
+      rs_username: <%= ENV['RS_USERNAME'] %>
+      rs_apikey: <%= ENV['RS_APIKEY'] %>
+      rs_region: <%= ENV['RS_REGION'] %>
+      rs_containter: <%= ENV['RS_CONTAINER'] %>
