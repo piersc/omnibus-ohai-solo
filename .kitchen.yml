@@ -28,4 +28,6 @@ suites:
   run_list:
     - recipe[omnibus::default]
     - recipe[omnibus_ohai_solo::default]
-  attributes: {}
+  attributes:
+    omnibus:
+      ruby_version: "1.9.3-p484"
