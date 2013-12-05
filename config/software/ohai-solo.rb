@@ -60,4 +60,6 @@ build do
       "-n #{install_dir}/bin",
       "--no-rdoc --no-ri"].join(" "), :env => env.merge({"PATH" => "#{install_dir}/embedded/bin:#{ENV['PATH']}"})
 
+  command "echo '#{build_version}' > #{build_dir}/build_version"
+
 end
