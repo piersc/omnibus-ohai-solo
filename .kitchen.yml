@@ -39,4 +39,4 @@ suites:
       rs_username: <%= ENV['RS_USERNAME'] %>
       rs_apikey: <%= ENV['RS_APIKEY'] %>
       rs_region: <%= ENV['RS_REGION'] %>
-      rs_containter: <%= ENV['RS_CONTAINER'] %>
+      rs_container: <%= ENV['RS_CONTAINER'] %>
