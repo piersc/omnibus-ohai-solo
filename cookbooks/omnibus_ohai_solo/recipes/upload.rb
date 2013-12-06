@@ -17,15 +17,22 @@ end
 # to upload them to CloudFiles
 ruby_block "find_packages" do
   block do
-    packages = []
+    uploads = []
     files = Dir.glob("/var/cache/omnibus/pkg/*.json")
+    uploads << files
     files.each do |file|
       body = JSON.parse(File.read(file))
-      packages << body['basename']
+      uploads << body['basename']
     end
-    packages.each do |pkg|
-      r.filename ::File.join("/var/cache/omnibus/pkg", pkg)
+    uploads.each do |file|
+      r.filename ::File.join("/var/cache/omnibus/pkg", file)
       r.run_action(:upload)
     end
+    latest = files.sort_by {|file| File.mtime(file)}.last
+    newfile = "latest.#{node[:platform]}.#{node[:platform_version]}.#{node[:kernel][:machine]}.json"
+    ::File.copy(latest, ::File.join("/var/cache/omnibus/pkg", newfile))
+    r.filename ::File.join("/var/cache/omnibus/pkg", newfile)
+    r.run_action(:upload) 
   end
 end
+
