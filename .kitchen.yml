@@ -26,10 +26,13 @@ platforms:
 suites:
 - name: ohai-solo
   run_list:
+    - recipe[build-essential]
     - recipe[omnibus::default]
     - recipe[omnibus_ohai_solo::default]
     - recipe[omnibus_ohai_solo::upload]
   attributes:
+    build_essential:
+      compiletime: true
     omnibus:
       ruby_version: "1.9.3-p484"
     omnibus_ohai_solo:
