@@ -28,10 +28,23 @@ ruby_block "find_packages" do
       r.filename ::File.join("/var/cache/omnibus/pkg", file)
       r.run_action(:upload)
     end
+
+    if platform?("redhat", "centos", "debian")
+      version = node[:platform_version].to_i
+    else
+      version = node[:platform_version]
+    end
+
+    if node[:omnibus_ohai_solo][:release_environment] == "prod"
+      release = "latest"
+    else
+       release = node[:omnibus_ohai_solo][:release_environment]
+    end
+
     latest = files.sort_by {|file| File.mtime(file)}.last
     input = File.open(latest)
     data = input.read()
-    newfile = "/var/cache/omnibus/pkg/latest.#{node[:platform]}.#{node[:platform_version]}.#{node[:kernel][:machine]}.json"
+    newfile = "/var/cache/omnibus/pkg/#{release}.#{node[:platform]}.#{version}.#{node[:kernel][:machine]}.json"
     output = File.open(newfile, 'w')
     output.write(data)
     input.close()

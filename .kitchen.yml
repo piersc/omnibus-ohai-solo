@@ -40,3 +40,4 @@ suites:
       rs_apikey: <%= ENV['RS_APIKEY'] %>
       rs_region: <%= ENV['RS_REGION'] %>
       rs_container: <%= ENV['RS_CONTAINER'] %>
+      release_environment: <%= ENV['OHAI_RELEASE_ENV'] %>
