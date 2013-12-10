@@ -19,8 +19,8 @@ ruby_block "find_packages" do
   block do
     uploads = []
     files = Dir.glob("/var/cache/omnibus/pkg/*.json")
-    uploads << files
     files.each do |file|
+      uploads << file
       body = JSON.parse(File.read(file))
       uploads << body['basename']
     end
