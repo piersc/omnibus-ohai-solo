@@ -29,8 +29,12 @@ ruby_block "find_packages" do
       r.run_action(:upload)
     end
 
+    # Only use major version for RHEL/Cent and Debian.
+    platform = nil
     if platform?("redhat", "centos", "debian")
       version = node[:platform_version].to_i
+      # Make json manifest name match package name for RHEL/Cent.
+      platform = "el" unless platform?("debian")
     else
       version = node[:platform_version]
     end
@@ -44,7 +48,7 @@ ruby_block "find_packages" do
     latest = files.sort_by {|file| File.mtime(file)}.last
     input = File.open(latest)
     data = input.read()
-    newfile = "/var/cache/omnibus/pkg/#{release}.#{node[:platform]}.#{version}.#{node[:kernel][:machine]}.json"
+    newfile = "/var/cache/omnibus/pkg/#{release}.#{platform || node[:platform]}.#{version}.#{node[:kernel][:machine]}.json"
     output = File.open(newfile, 'w')
     output.write(data)
     input.close()
