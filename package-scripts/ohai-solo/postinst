@@ -12,7 +12,8 @@ function error_exit
   exit 1
 }
 
-ln -s /opt/ohai-solo/bin/ohai /usr/bin/ohai-solo
+rm /usr/bin/ohai-solo
+ln -s /opt/ohai-solo/bin/ohai-solo /usr/bin/ohai-solo
 echo "Thank you for installing ohai-solo!"
 
 exit 0

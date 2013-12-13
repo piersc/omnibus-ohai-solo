@@ -9,6 +9,7 @@ build_version   Omnibus::BuildVersion.new.semver
 # creates required build directories
 dependency "preparation"
 dependency "version-manifest"
+dependency "ohai"
 dependency "ohai-solo"
 
 exclude "\.git*"
