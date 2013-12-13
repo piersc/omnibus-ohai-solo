@@ -56,3 +56,5 @@ suites:
       rs_region: <%= ENV['RS_REGION'] %>
       rs_container: <%= ENV['RS_CONTAINER'] %>
       release_environment: <%= ENV['OHAI_RELEASE_ENV'] %>
+      ref: <%= ENV['OHAI_SOLO_VERSION'] || "HEAD" %>
+      append_timestamp: <%= ENV['APPEND_TIMESTAMP'] || "true" %>

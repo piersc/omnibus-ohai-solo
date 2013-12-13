@@ -1,4 +1,4 @@
-name "ohai-solo"
+name "ohai"
 if platform == 'windows'
   dependency "ruby-windows" #includes rubygems
   dependency "ruby-windows-devkit"
@@ -14,7 +14,7 @@ version "e5d69208af15ee84b702e8dcdcabf32996440eae"
 
 source :git => "git://github.com/opscode/ohai"
 
-relative_path "ohai-solo"
+relative_path "ohai"
 
 always_build true
 
@@ -50,16 +50,11 @@ env =
 build do
 
   # Remove the Chef plugins so we don't have to install Chef
-  
-  command "rm #{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb" if File.exists?("#{source_dir}/ohai-solo/lib/ohai/plugins/chef.rb")
-  command "cp /opt/ohai-plugins/plugins/* #{source_dir}/ohai-solo/lib/ohai/plugins/"
 
   gem "build ohai.gemspec"
 
   gem ["install ./ohai*.gem",
       "-n #{install_dir}/bin",
       "--no-rdoc --no-ri"].join(" "), :env => env.merge({"PATH" => "#{install_dir}/embedded/bin:#{ENV['PATH']}"})
-
-  command "echo '#{build_version}' > #{build_dir}/build_version"
 
 end

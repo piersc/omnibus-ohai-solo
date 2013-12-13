@@ -13,6 +13,11 @@ end
 
 script "BUILD ALL THE THINGS" do
   interpreter 'bash'
+  if node[:omnibus_ohai_solo][:append_timestamp] == "true"
+    environment("OMNIBUS_APPEND_TIMESTAMP" => "true")
+  else
+    environment("OMNIBUS_APPEND_TIMESTAMP" => "false")
+  end
   cwd "/opt/omnibus-ohai-solo"
   code <<-OMNIBUS_BUILD
     export PATH=/usr/local/bin:$PATH
