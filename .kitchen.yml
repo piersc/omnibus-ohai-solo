@@ -56,4 +56,4 @@ suites:
       rs_region: <%= ENV['RS_REGION'] %>
       rs_container: <%= ENV['RS_CONTAINER'] %>
       release_environment: <%= ENV['OHAI_RELEASE_ENV'] %>
-      ref: <%= ENV['OHAI_BUILD_VERSION'] || "master" %>
+      ref: <%= ENV['OHAI_SOLO_BUILD_VERSION'] || "master" %>
