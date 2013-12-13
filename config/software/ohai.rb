@@ -1,4 +1,4 @@
-name "ohai-solo"
+name "ohai"
 if platform == 'windows'
   dependency "ruby-windows" #includes rubygems
   dependency "ruby-windows-devkit"
