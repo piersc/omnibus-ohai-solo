@@ -10,7 +10,7 @@ build_version   Omnibus::BuildVersion.new.semver
 dependency "preparation"
 dependency "version-manifest"
 dependency "ohai"
-dependency "ohai-solo"
+dependency "ohai-plugins"
 
 exclude "\.git*"
 exclude "bundler\/git"
