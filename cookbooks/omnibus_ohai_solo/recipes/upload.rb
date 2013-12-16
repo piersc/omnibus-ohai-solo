@@ -1,4 +1,5 @@
 require 'json'
+require 'time'
 
 include_recipe "rackspacecloud"
 
@@ -46,12 +47,12 @@ ruby_block "find_packages" do
     end
 
     latest = files.sort_by {|file| File.mtime(file)}.last
-    input = File.open(latest)
-    data = input.read()
+    data = JSON.parse(IO.read(latest))
+    last_modified = Time.now().getgm.strftime("%Y-%m-%dT%H:%M:%S")
+    data['last_modified'] = last_modified
     newfile = "/var/cache/omnibus/pkg/#{release}.#{platform || node[:platform]}.#{version}.#{node[:kernel][:machine]}.json"
     output = File.open(newfile, 'w')
-    output.write(data)
-    input.close()
+    output.write(JSON.dump(data))
     output.close()
     r.filename newfile
     r.run_action(:upload) 
