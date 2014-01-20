@@ -7,7 +7,7 @@ relative_path "ohai-plugins"
 
 always_build true
 
-dependency cacerts
+dependency "cacerts"
 
 build do
 
