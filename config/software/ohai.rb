@@ -9,6 +9,7 @@ else
 end
 
 dependency "bundler"
+dependency "cacerts"
 
 version "e5d69208af15ee84b702e8dcdcabf32996440eae"
 
