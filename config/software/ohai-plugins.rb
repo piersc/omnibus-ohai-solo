@@ -7,6 +7,8 @@ relative_path "ohai-plugins"
 
 always_build true
 
+dependency cacerts
+
 build do
 
   command "cp -a plugins #{install_dir}"
