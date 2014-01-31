@@ -58,3 +58,5 @@ suites:
       release_environment: <%= ENV['OHAI_RELEASE_ENV'] %>
       ref: <%= ENV['OHAI_SOLO_VERSION'] || "HEAD" %>
       append_timestamp: <%= ENV['APPEND_TIMESTAMP'] || "true" %>
+    ohai_plugins:
+      ref: <%= ENV['OHAI_PLUGINS_VERSION'] || "HEAD" %> 
