@@ -4,7 +4,7 @@ homepage "http://rackspace.com"
 
 replaces        "ohai-solo"
 install_path    "/opt/ohai-solo"
-build_version   Omnibus::BuildVersion.new.semver
+build_version   ENV['OHAI_SOLO_VERSION'] || Omnibus::BuildVersion.new.semver
 
 # creates required build directories
 dependency "preparation"
