@@ -18,6 +18,9 @@ script "BUILD ALL THE THINGS" do
   else
     environment("OMNIBUS_APPEND_TIMESTAMP" => "false")
   end
+  if node[:omnibus_ohai_solo][:build_version]
+    environment("OHAI_SOLO_VERSION" => node[:omnibus_ohai_solo][:build_version])
+  end
   cwd "/opt/omnibus-ohai-solo"
   code <<-OMNIBUS_BUILD
     export PATH=/usr/local/bin:$PATH
