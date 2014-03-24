@@ -1,7 +1,7 @@
 {
   "sources": {
     "build-essential": {
-      "locked_version": "1.4.0"
+      "locked_version": "2.0.0"
     },
     "omnibus": {
       "locked_version": "1.2.0"
@@ -10,9 +10,9 @@
       "path": "./cookbooks/omnibus_ohai_solo"
     },
     "rackspacecloud": {
-      "locked_version": "0.0.5",
+      "locked_version": "0.0.6",
       "git": "git://github.com/rackops/rackspacecloud.git",
-      "ref": "26135433af3d8a56f3440077cfc8b6684790e695"
+      "ref": "ff5b2d8956962733746fb1b34b3e722b5639cf73"
     },
     "git": {
       "locked_version": "4.0.1",
@@ -35,10 +35,10 @@
       "locked_version": "1.6.5"
     },
     "ohai": {
-      "locked_version": "1.1.8"
+      "locked_version": "1.1.10"
     },
     "yum": {
-      "locked_version": "2.2.0"
+      "locked_version": "2.2.4"
     },
     "windows": {
       "locked_version": "1.8.10"
@@ -53,10 +53,10 @@
       "locked_version": "1.0.2"
     },
     "xml": {
-      "locked_version": "1.1.2"
+      "locked_version": "1.2.2"
     },
     "dmg": {
-      "locked_version": "1.1.0"
+      "locked_version": "2.2.0"
     },
     "runit": {
       "locked_version": "1.5.8"
