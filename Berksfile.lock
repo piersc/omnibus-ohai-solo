@@ -1,56 +1,45 @@
 {
   "sources": {
     "build-essential": {
-      "locked_version": "1.4.0"
+      "locked_version": "2.0.1",
+      "git": "git://github.com/opscode-cookbooks/build-essential.git",
+      "ref": "4d9f91c101588ab5292259fd06c1b50d935b7f73"
     },
     "omnibus": {
-      "locked_version": "1.2.0"
+      "locked_version": "1.2.5",
+      "git": "git://github.com/opscode-cookbooks/omnibus.git",
+      "ref": "4098f425b8fc60f364f3aac30bb2cda5097b1740"
     },
     "omnibus_ohai_solo": {
       "path": "./cookbooks/omnibus_ohai_solo"
     },
     "rackspacecloud": {
-      "locked_version": "0.0.5",
+      "locked_version": "0.0.6",
       "git": "git://github.com/rackops/rackspacecloud.git",
-      "ref": "26135433af3d8a56f3440077cfc8b6684790e695"
+      "ref": "ff5b2d8956962733746fb1b34b3e722b5639cf73"
     },
     "git": {
       "locked_version": "4.0.1",
       "git": "git://github.com/opscode-cookbooks/git.git",
       "ref": "76b0f9bb08fdd9e2e201fd70b72298097accdf96"
     },
-    "apt": {
-      "locked_version": "1.9.2"
-    },
-    "homebrew": {
-      "locked_version": "1.3.2"
-    },
-    "pkgin": {
-      "locked_version": "0.4.0"
-    },
-    "pkgutil": {
-      "locked_version": "0.0.3"
-    },
-    "rbenv": {
-      "locked_version": "1.6.5"
-    },
-    "ohai": {
-      "locked_version": "1.1.8"
-    },
-    "yum": {
-      "locked_version": "2.2.0"
+    "7-zip": {
+      "locked_version": "1.0.2"
     },
     "windows": {
-      "locked_version": "1.8.10"
+      "locked_version": "1.12.8"
     },
     "chef_handler": {
       "locked_version": "1.1.4"
     },
+    "chef-sugar": {
+      "locked_version": "1.2.8"
+    },
+    "homebrew": {
+      "locked_version": "1.5.4"
+    },
     "wix": {
       "locked_version": "1.1.0"
-    },
-    "7-zip": {
-      "locked_version": "1.0.2"
     },
     "xml": {
       "locked_version": "1.1.2"
@@ -60,6 +49,9 @@
     },
     "runit": {
       "locked_version": "1.5.8"
+    },
+    "yum": {
+      "locked_version": "3.1.4"
     },
     "yum-epel": {
       "locked_version": "0.3.4"
