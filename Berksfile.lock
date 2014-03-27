@@ -1,9 +1,12 @@
 {
   "sources": {
+    "apt": {
+      "locked_version": "2.3.8"
+    },
     "build-essential": {
-      "locked_version": "2.0.1",
+      "locked_version": "1.4.4",
       "git": "git://github.com/opscode-cookbooks/build-essential.git",
-      "ref": "4d9f91c101588ab5292259fd06c1b50d935b7f73"
+      "ref": "c1f1166bcd20ac4b3dbda518a794936ac4401d7f"
     },
     "omnibus": {
       "locked_version": "1.2.5",
