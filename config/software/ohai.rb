@@ -11,7 +11,7 @@ end
 dependency "bundler"
 dependency "cacerts"
 
-version "7.0.0.rc.0"
+default_version "7.0.0.rc.0"
 
 source :git => "git://github.com/opscode/ohai"
 

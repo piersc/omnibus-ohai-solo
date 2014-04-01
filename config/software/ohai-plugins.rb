@@ -1,7 +1,7 @@
 name "ohai-plugins"
 
 source :git => "git://github.com/rackerlabs/ohai-plugins"
-version "master"
+default_version "master"
 
 relative_path "ohai-plugins"
 
