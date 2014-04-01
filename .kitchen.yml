@@ -17,12 +17,12 @@ platforms:
   - recipe[apt]
 - name: ubuntu-1210
   driver_config:
-    image_id: d45ed9c5-d6fc-4c9d-89ea-1b3ae1c83999
+    image_id: 3dfff025-724f-44d9-af75-f94e7f09eae6
   run_list:
   - recipe[apt]
 - name: ubuntu-1204
   driver_config:
-    image_id: 80fbcb55-b206-41f9-9bc2-2dd7aac6c061
+    image_id: c9c7732f-5129-4930-a835-3781255fb1e2
   run_list:
   - recipe[apt]
 - name: ubuntu-1110
@@ -42,12 +42,12 @@ platforms:
   - recipe[apt]
 - name: debian-7
   driver_config:
-    image_id: 857d7d36-34f3-409f-8435-693e8797be8b
+    image_id: 11dfbc2f-90f5-45f8-8162-f49524096ca4
   run_list:
   - recipe[apt]
 - name: centos-6
   driver_config:
-    image_id: f70ed7c7-b42e-4d77-83d8-40fa29825b85
+    image_id: e17610a2-3ee8-4177-b781-30735aafe1c2
 - name: centos-5
   driver_config:
     image_id: 9522c27d-51d9-44ee-8eb3-fb7b14fd4042
