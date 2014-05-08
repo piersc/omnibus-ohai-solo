@@ -10,6 +10,16 @@ driver_config:
   rackspace_region: <%= ENV['RS_REGION'] %>
 
 platforms:
+#- name: ubuntu-1404
+#  driver_config:
+#    image_id: bb02b1a3-bc77-4d17-ab5b-421d89850fca 
+#  run_list:
+#  - recipe[apt]
+- name: ubuntu-1310
+  driver_config:
+    image_id: df27d481-63a5-40ca-8920-3d132ed643d9 
+  run_list:
+  - recipe[apt]
 - name: ubuntu-1304
   driver_config:
     image_id: 4b54f5a0-137f-4751-8e7c-fe707185e531
@@ -23,11 +33,6 @@ platforms:
 - name: ubuntu-1204
   driver_config:
     image_id: c9c7732f-5129-4930-a835-3781255fb1e2
-  run_list:
-  - recipe[apt]
-- name: ubuntu-1110
-  driver_config:
-    image_id: 3afe97b2-26dc-49c5-a2cc-a2fc8d80c001
   run_list:
   - recipe[apt]
 - name: ubuntu-1004
@@ -61,8 +66,10 @@ suites:
     - recipe[omnibus_ohai_solo::default]
     - recipe[omnibus_ohai_solo::upload]
   attributes:
-    build_essential:
-      compiletime: true
+    apt:
+      update_compile_time: true
+    build-essential:
+      compile_time: true
     git:
       version: "1.9.0"
     omnibus:

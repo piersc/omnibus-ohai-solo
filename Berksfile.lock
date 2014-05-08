@@ -1,63 +1,62 @@
-{
-  "sources": {
-    "apt": {
-      "locked_version": "2.3.8"
-    },
-    "build-essential": {
-      "locked_version": "1.4.4",
-      "git": "git://github.com/opscode-cookbooks/build-essential.git",
-      "ref": "c1f1166bcd20ac4b3dbda518a794936ac4401d7f"
-    },
-    "omnibus": {
-      "locked_version": "1.2.5",
-      "git": "git://github.com/opscode-cookbooks/omnibus.git",
-      "ref": "4098f425b8fc60f364f3aac30bb2cda5097b1740"
-    },
-    "omnibus_ohai_solo": {
-      "path": "./cookbooks/omnibus_ohai_solo"
-    },
-    "rackspacecloud": {
-      "locked_version": "0.0.6",
-      "git": "git://github.com/rackops/rackspacecloud.git",
-      "ref": "ff5b2d8956962733746fb1b34b3e722b5639cf73"
-    },
-    "git": {
-      "locked_version": "4.0.1",
-      "git": "git://github.com/opscode-cookbooks/git.git",
-      "ref": "76b0f9bb08fdd9e2e201fd70b72298097accdf96"
-    },
-    "7-zip": {
-      "locked_version": "1.0.2"
-    },
-    "windows": {
-      "locked_version": "1.12.8"
-    },
-    "chef_handler": {
-      "locked_version": "1.1.4"
-    },
-    "chef-sugar": {
-      "locked_version": "1.2.8"
-    },
-    "homebrew": {
-      "locked_version": "1.5.4"
-    },
-    "wix": {
-      "locked_version": "1.1.0"
-    },
-    "xml": {
-      "locked_version": "1.1.2"
-    },
-    "dmg": {
-      "locked_version": "1.1.0"
-    },
-    "runit": {
-      "locked_version": "1.5.8"
-    },
-    "yum": {
-      "locked_version": "3.1.4"
-    },
-    "yum-epel": {
-      "locked_version": "0.3.4"
-    }
-  }
-}
+DEPENDENCIES
+  apt
+    git: git://github.com/ryandub/apt.git
+    revision: 6b8c0c6c92cb3a0127f1d4795072e96d6119c645
+    ref: updatec
+  build-essential
+    git: git://github.com/opscode-cookbooks/build-essential.git
+    revision: cb9201a6cf57e15c4995303f7e4df2dea462c3a6
+  git
+    git: git://github.com/opscode-cookbooks/git.git
+    revision: b1bca76aaf3a3a2131744f17f6e5087e22fa3c40
+  omnibus
+    git: git://github.com/opscode-cookbooks/omnibus.git
+    revision: 24f26e7a48519d41daf7d9c146730e44a127d1f6
+  omnibus_ohai_solo
+    path: cookbooks/omnibus_ohai_solo
+  rackspacecloud
+    git: git://github.com/rackops/rackspacecloud.git
+    revision: 42931a765132ce336771be217f649d0e7db049df
+
+GRAPH
+  7-zip (1.0.2)
+    windows (>= 1.2.2)
+  apt (2.3.11)
+  build-essential (2.0.3)
+  chef-sugar (1.3.0)
+  chef_handler (1.1.6)
+  dmg (2.2.0)
+  git (4.0.3)
+    build-essential (>= 0.0.0)
+    dmg (>= 0.0.0)
+    runit (>= 1.0.0)
+    windows (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  homebrew (1.6.2)
+  omnibus (2.0.3)
+    7-zip (~> 1.0)
+    build-essential (~> 2.0)
+    chef-sugar (~> 1.1)
+    homebrew (~> 1.5)
+    windows (~> 1.30)
+    wix (~> 1.1)
+  omnibus_ohai_solo (0.0.1)
+    omnibus (>= 0.0.0)
+    rackspacecloud (>= 0.0.0)
+    xml (>= 0.0.0)
+  rackspacecloud (0.1.0)
+    xml (>= 0.0.0)
+  runit (1.5.10)
+    build-essential (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  windows (1.31.0)
+    chef_handler (>= 0.0.0)
+  wix (1.1.0)
+    windows (>= 1.2.2)
+  xml (1.2.4)
+    build-essential (>= 0.0.0)
+  yum (3.2.0)
+  yum-epel (0.3.6)
+    yum (~> 3.0)
