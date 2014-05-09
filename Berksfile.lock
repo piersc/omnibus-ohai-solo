@@ -1,7 +1,7 @@
 DEPENDENCIES
   apt
     git: git://github.com/ryandub/apt.git
-    revision: 6b8c0c6c92cb3a0127f1d4795072e96d6119c645
+    revision: 1cb512f6b243c8579b5ed9f8c455a5f20592e577
     ref: updatec
   build-essential
     git: git://github.com/opscode-cookbooks/build-essential.git
@@ -33,7 +33,7 @@ GRAPH
     windows (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  homebrew (1.6.2)
+  homebrew (1.6.4)
   omnibus (2.0.3)
     7-zip (~> 1.0)
     build-essential (~> 2.0)

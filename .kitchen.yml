@@ -1,61 +1,86 @@
 ---
-driver_plugin: rackspace
+driver:
+  name: vagrant
+  customize:
+    memory: 1024
+    cpuexecutioncap: 50
+  synced_folders:
+    - ["<%= File.expand_path(File.dirname(__FILE__)) %>/plugins", "/opt/ohai-plugins"]
+    - ["<%= File.expand_path("..", __FILE__) %>", "/home/vagrant/<%= File.basename(File.expand_path("..", __FILE__)) %>"]
 driver_config:
   require_chef_omnibus: latest
-  rackspace_username: <%= ENV['RS_USERNAME'] %>
-  rackspace_api_key: <%= ENV['RS_APIKEY'] %>
-  test_base_path: /opt/build
-  public_key_path: <%= ENV['SSH_KEY_FILE'] %>
-  flavor_id: <%= ENV['RS_FLAVOR'] %>
-  rackspace_region: <%= ENV['RS_REGION'] %>
-
+provisioner:
+  name: chef_solo
 platforms:
-#- name: ubuntu-1404
-#  driver_config:
-#    image_id: bb02b1a3-bc77-4d17-ab5b-421d89850fca 
-#  run_list:
-#  - recipe[apt]
-- name: ubuntu-1310
-  driver_config:
-    image_id: df27d481-63a5-40ca-8920-3d132ed643d9 
-  run_list:
-  - recipe[apt]
-- name: ubuntu-1304
-  driver_config:
-    image_id: 4b54f5a0-137f-4751-8e7c-fe707185e531
-  run_list:
-  - recipe[apt]
-- name: ubuntu-1210
-  driver_config:
-    image_id: 3dfff025-724f-44d9-af75-f94e7f09eae6
-  run_list:
-  - recipe[apt]
-- name: ubuntu-1204
-  driver_config:
-    image_id: c9c7732f-5129-4930-a835-3781255fb1e2
-  run_list:
-  - recipe[apt]
-- name: ubuntu-1004
-  driver_config:
-    image_id: aab63bcf-89aa-440f-b0c7-c7a1c611914b
-  run_list:
-  - recipe[apt]
-- name: debian-6
-  driver_config:
-    image_id: 695ca76e-fc0d-4e36-82e0-8ed66480a999
-  run_list:
-  - recipe[apt]
-- name: debian-7
-  driver_config:
-    image_id: 11dfbc2f-90f5-45f8-8162-f49524096ca4
-  run_list:
-  - recipe[apt]
-- name: centos-6
-  driver_config:
-    image_id: e17610a2-3ee8-4177-b781-30735aafe1c2
-- name: centos-5
-  driver_config:
-    image_id: 9522c27d-51d9-44ee-8eb3-fb7b14fd4042
+  - name: ubuntu-10.04
+    driver_config:
+      box: vagrant-ubuntu-10.04
+      box_url: http://files.vagrantup.com/lucid64.box
+      require_chef_omnibus: true
+    run_list:
+    - recipe[apt]
+  - name: ubuntu-12.04
+    driver_config:
+      box: vagrant-ubuntu-12.04
+      box_url: http://files.vagrantup.com/precise64.box
+      require_chef_omnibus: true
+    run_list:
+    - recipe[apt]
+  - name: ubuntu-12.10
+    driver_config:
+      box: vagrant-ubuntu-12.10
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.10_chef-provisionerless.box
+      require_chef_omnibus: true
+    run_list:
+    - recipe[apt]
+  - name: ubuntu-13.04
+    driver_config:
+      box: vagrant-ubtuntu-13.04
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.04_chef-provisionerless.box
+      require_chef_omnibus: true
+    run_list:
+    - recipe[apt]
+  - name: ubuntu-13.10
+    driver_config:
+      box: vagrant-ubuntu-13.10
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.10_chef-provisionerless.box
+      require_chef_omnibus: true
+    run_list:
+    - recipe[apt]
+# Ubuntu 14.04's version of readline is imcompatible with compiling Ruby.
+# Fix provided in https://bugs.ruby-lang.org/issues/9578 but will not
+# ship until Ruby 2.1.2.
+#  - name: ubuntu-14.04
+#    driver_config:
+#      box: vagrant-ubuntu-14.04
+#      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box
+#      require_chef_omnibus: true
+#    run_list:
+#    - recipe[apt]
+  - name: centos-5
+    driver_config:
+      box: vagrant-centos-5
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-5.10_chef-provisionerless.box
+      require_chef_omnibus: true
+  - name: centos-6
+    driver_config:
+      box: vagrant-centos-6
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.5_chef-provisionerless.box
+      require_chef_omnibus: true
+  - name: debian-6
+    driver_config:
+      box: vagrant-debian-6
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-6.0.8_chef-provisionerless.box
+      require_chef_omnibus: true
+    run_list:
+    - recipe[apt]
+  - name: debian-7
+    driver_config:
+      box: vagrant-debian-7
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
+      require_chef_omnibus: true
+    run_list:
+    - recipe[apt]
 
 suites:
 - name: ohai-solo
@@ -67,7 +92,7 @@ suites:
     - recipe[omnibus_ohai_solo::upload]
   attributes:
     apt:
-      update_compile_time: true
+      compile_time_update: true
     build-essential:
       compile_time: true
     git:
@@ -84,4 +109,4 @@ suites:
       build_version: <%= ENV['OHAI_SOLO_VERSION'] %>
       append_timestamp: <%= ENV['APPEND_TIMESTAMP'] || "true" %>
     ohai_plugins:
-      ref: <%= ENV['OHAI_PLUGINS_VERSION'] || "HEAD" %> 
+      ref: <%= ENV['OHAI_PLUGINS_VERSION'] || "HEAD" %>
