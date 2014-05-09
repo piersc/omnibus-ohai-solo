@@ -1,7 +1,9 @@
 # ohai-solo Omnibus project
 
 This project creates full-stack platform-specific packages for
-`ohai-solo`!
+`ohai-solo`! `ohai-solo` is a sandboxed distribution of Chef's
+[Ohai](https://github.com/opscode/ohai) system profiler with extra plugins from
+our [ohai-plugins](https://github.com/rackerlabs/ohai-plugins) repo.
 
 ## Installation
 
@@ -62,19 +64,12 @@ that will allow you to build your projects on the following platforms:
 * CentOS 5 64-bit
 * CentOS 6 64-bit
 * Ubuntu 10.04 64-bit
-* Ubuntu 11.04 64-bit
 * Ubuntu 12.04 64-bit
-
-Please note this build-lab is only meant to get you up and running quickly;
-there's nothing inherent in Omnibus that restricts you to just building CentOS
-or Ubuntu packages. See the Vagrantfile to add new platforms to your build lab.
-
-The only requirements for standing up this virtualized build lab are:
-
-* VirtualBox - native packages exist for most platforms and can be downloaded
-from the [VirtualBox downloads page](https://www.virtualbox.org/wiki/Downloads).
-* Vagrant 1.2.1+ - native packages exist for most platforms and can be downloaded
-from the [Vagrant downloads page](http://downloads.vagrantup.com/).
+* Ubuntu 12.10 64-bit
+* Ubuntu 13.10 64-bit
+* Ubuntu 14.04 64-bit
+* Debian 6 64-bit
+* Debian 7 64-bit
 
 The [vagrant-berkshelf](https://github.com/RiotGames/vagrant-berkshelf) and
 [vagrant-omnibus](https://github.com/schisamo/vagrant-omnibus) Vagrant plugins

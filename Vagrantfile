@@ -15,35 +15,61 @@ project_name = "ohai-solo"
 Vagrant.configure("2") do |config|
 
   config.vm.hostname = "#{project_name}-omnibus-build-lab"
+  config.ssh.insert_key = true
+
 
   config.vm.define 'ubuntu-10.04' do |c|
     c.berkshelf.berksfile_path = "./Berksfile"
     c.vm.box = "opscode-ubuntu-10.04"
-    c.vm.box_url = "http://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_chef-11.2.0.box"
-  end
-
-  config.vm.define 'ubuntu-11.04' do |c|
-    c.berkshelf.berksfile_path = "./Berksfile"
-    c.vm.box = "opscode-ubuntu-11.04"
-    c.vm.box_url = "http://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-11.04.box"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-10.04_chef-provisionerless.box"
   end
 
   config.vm.define 'ubuntu-12.04' do |c|
     c.berkshelf.berksfile_path = "./Berksfile"
-    c.vm.box = "canonical-ubuntu-12.04"
-    c.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+    c.vm.box = "opscode-ubuntu-12.04"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
+  end
+
+  config.vm.define 'ubuntu-12.10' do |c|
+    c.berkshelf.berksfile_path = "./Berksfile"
+    c.vm.box = "opscode-ubuntu-12.10"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.10_chef-provisionerless.box"
+  end
+
+  config.vm.define 'ubuntu-13.10' do |c|
+    c.berkshelf.berksfile_path = "./Berksfile"
+    c.vm.box = "opscode-ubuntu-13.10"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.10_chef-provisionerless.box"
+  end
+
+  config.vm.define 'ubuntu-14.04' do |c|
+    c.berkshelf.berksfile_path = "./Berksfile"
+    c.vm.box = "opscode-ubuntu-14.04"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
   end
 
   config.vm.define 'centos-5' do |c|
     c.berkshelf.berksfile_path = "./Berksfile"
-    c.vm.box = "opscode-centos-5.8"
-    c.vm.box_url = "http://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-5.8_chef-11.2.0.box"
+    c.vm.box = "opscode-centos-5"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-5.10_chef-provisionerless.box"
   end
 
   config.vm.define 'centos-6' do |c|
     c.berkshelf.berksfile_path = "./Berksfile"
-    c.vm.box = "opscode-centos-6.3"
-    c.vm.box_url = "http://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.3_chef-11.2.0.box"
+    c.vm.box = "opscode-centos-6"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.5_chef-provisionerless.box"
+  end
+
+  config.vm.define 'debian-6' do |c|
+    c.berkshelf.berksfile_path = "./Berksfile"
+    c.vm.box = "opscode-debian-6"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-6.0.8_chef-provisionerless.box"
+  end
+
+  config.vm.define 'debian-7' do |c|
+    c.berkshelf.berksfile_path = "./Berksfile"
+    c.vm.box = "opscode-debian-7"
+    c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.4_chef-provisionerless.box"
   end
 
   config.vm.provider :virtualbox do |vb|
@@ -62,8 +88,6 @@ Vagrant.configure("2") do |config|
   config.berkshelf.enabled = true
   # The path to the Berksfile to use with Vagrant Berkshelf
   config.berkshelf.berksfile_path = "./Berksfile"
-
-  config.ssh.forward_agent = true
 
   config.vm.synced_folder host_project_path, guest_project_path
   config.vm.synced_folder plugins_path, "/opt/ohai-plugins"
