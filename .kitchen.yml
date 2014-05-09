@@ -110,3 +110,5 @@ suites:
       append_timestamp: <%= ENV['APPEND_TIMESTAMP'] || "true" %>
     ohai_plugins:
       ref: <%= ENV['OHAI_PLUGINS_VERSION'] || "HEAD" %>
+    rackspacecloud:
+      fog_version: "1.22.0"
