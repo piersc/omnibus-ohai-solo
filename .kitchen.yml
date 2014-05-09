@@ -102,7 +102,7 @@ suites:
     omnibus_ohai_solo:
       rs_username: <%= ENV['RS_USERNAME'] %>
       rs_apikey: <%= ENV['RS_APIKEY'] %>
-      rs_region: <%= ENV['RS_REGION'] %>
+      rs_region: <%= ENV['RS_CONTAINER_REGION'] %>
       rs_container: <%= ENV['RS_CONTAINER'] %>
       release_environment: <%= ENV['OHAI_RELEASE_ENV'] %>
       ref: <%= ENV['OHAI_SOLO_VERSION'] || "HEAD" %>
