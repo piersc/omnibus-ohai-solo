@@ -18,6 +18,7 @@ platforms:
       box_url: http://files.vagrantup.com/lucid64.box
       require_chef_omnibus: true
     run_list:
+    - recipe[omnibus_ohai_solo::apt]
     - recipe[apt]
   - name: ubuntu-12.04
     driver_config:
@@ -25,6 +26,7 @@ platforms:
       box_url: http://files.vagrantup.com/precise64.box
       require_chef_omnibus: true
     run_list:
+    - recipe[omnibus_ohai_solo::apt]
     - recipe[apt]
   - name: ubuntu-12.10
     driver_config:
@@ -32,6 +34,7 @@ platforms:
       box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.10_chef-provisionerless.box
       require_chef_omnibus: true
     run_list:
+    - recipe[omnibus_ohai_solo::apt]
     - recipe[apt]
   - name: ubuntu-13.04
     driver_config:
@@ -39,6 +42,7 @@ platforms:
       box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.04_chef-provisionerless.box
       require_chef_omnibus: true
     run_list:
+    - recipe[omnibus_ohai_solo::apt]
     - recipe[apt]
   - name: ubuntu-13.10
     driver_config:
@@ -46,6 +50,7 @@ platforms:
       box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.10_chef-provisionerless.box
       require_chef_omnibus: true
     run_list:
+    - recipe[omnibus_ohai_solo::apt]
     - recipe[apt]
 # Ubuntu 14.04's version of readline is imcompatible with compiling Ruby.
 # Fix provided in https://bugs.ruby-lang.org/issues/9578 but will not
@@ -73,6 +78,7 @@ platforms:
       box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-6.0.8_chef-provisionerless.box
       require_chef_omnibus: true
     run_list:
+    - recipe[omnibus_ohai_solo::apt]
     - recipe[apt]
   - name: debian-7
     driver_config:
@@ -80,6 +86,7 @@ platforms:
       box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
       require_chef_omnibus: true
     run_list:
+    - recipe[omnibus_ohai_solo::apt]
     - recipe[apt]
 
 suites:
