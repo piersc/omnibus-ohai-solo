@@ -56,11 +56,7 @@ platforms:
 - name: centos-6
   driver_config:
     image_id: f70ed7c7-b42e-4d77-83d8-40fa29825b85
-  run_list:
-  - recipe[yum-cron]
 - name: centos-5
   driver_config:
     image_id: 9522c27d-51d9-44ee-8eb3-fb7b14fd4042
-  run_list:
-  - recipe[yum-cron]
 
