@@ -1,29 +1,29 @@
 DEPENDENCIES
   apt
     git: git://github.com/ryandub/apt.git
-    revision: 1cb512f6b243c8579b5ed9f8c455a5f20592e577
+    revision: d558fcbb3a5d45f5fabeb1526445df5dad4604a7
     ref: updatec
   build-essential
     git: git://github.com/opscode-cookbooks/build-essential.git
-    revision: cb9201a6cf57e15c4995303f7e4df2dea462c3a6
+    revision: 400968913bfa8a4a5c9783b383c3b63899f2fe72
   git
     git: git://github.com/opscode-cookbooks/git.git
     revision: b1bca76aaf3a3a2131744f17f6e5087e22fa3c40
   omnibus
     git: git://github.com/opscode-cookbooks/omnibus.git
-    revision: 24f26e7a48519d41daf7d9c146730e44a127d1f6
+    revision: 3e4388b754a7ca8b89ebb8445a9d24537102be0c
   omnibus_ohai_solo
     path: cookbooks/omnibus_ohai_solo
   rackspacecloud
     git: git://github.com/rackops/rackspacecloud.git
-    revision: 42931a765132ce336771be217f649d0e7db049df
+    revision: 2fff4f0e807163157398089fbc1f42646bf3a1af
 
 GRAPH
   7-zip (1.0.2)
     windows (>= 1.2.2)
   apt (2.3.11)
-  build-essential (2.0.3)
-  chef-sugar (1.3.0)
+  build-essential (2.0.5)
+  chef-sugar (2.0.0)
   chef_handler (1.1.6)
   dmg (2.2.0)
   git (4.0.3)
@@ -33,11 +33,11 @@ GRAPH
     windows (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  homebrew (1.6.4)
-  omnibus (2.0.3)
+  homebrew (1.8.0)
+  omnibus (2.2.0)
     7-zip (~> 1.0)
     build-essential (~> 2.0)
-    chef-sugar (~> 1.1)
+    chef-sugar (~> 2.0)
     homebrew (~> 1.5)
     windows (~> 1.30)
     wix (~> 1.1)
@@ -45,18 +45,19 @@ GRAPH
     omnibus (>= 0.0.0)
     rackspacecloud (>= 0.0.0)
     xml (>= 0.0.0)
-  rackspacecloud (0.1.0)
+  rackspacecloud (0.1.1)
     xml (>= 0.0.0)
   runit (1.5.10)
     build-essential (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  windows (1.31.0)
+  windows (1.33.1)
     chef_handler (>= 0.0.0)
   wix (1.1.0)
     windows (>= 1.2.2)
-  xml (1.2.4)
+  xml (1.2.6)
     build-essential (>= 0.0.0)
-  yum (3.2.0)
+    chef-sugar (>= 0.0.0)
+  yum (3.2.2)
   yum-epel (0.3.6)
     yum (~> 3.0)
