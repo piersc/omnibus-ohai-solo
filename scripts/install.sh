@@ -150,8 +150,8 @@ case $platform in
       "9") platform_version="10.04";;
       "10") platform_version="10.04";;
       "11") platform_version="10.04";;
-      "13") platform_version="13.04";;
-      "14") platform_version="13.04";;
+      "13") platform_version="12.04";;
+      "14") platform_version="14.04";;
     esac
     ;;
   "el")
