@@ -10,32 +10,15 @@ driver_config:
   rackspace_region: <%= ENV['RS_REGION'] %>
 
 platforms:
-# Ubuntu 14.04's version of readline is imcompatible with compiling Ruby.
-# Fix provided in https://bugs.ruby-lang.org/issues/9578 but will not
-# ship until Ruby 2.1.2.
-#- name: ubuntu-1404
-#  driver_config:
-#    image_id: bb02b1a3-bc77-4d17-ab5b-421d89850fca
-#  run_list:
-#  - recipe[apt]
-- name: ubuntu-1310
+- name: ubuntu-1404
   driver_config:
-    image_id: df27d481-63a5-40ca-8920-3d132ed643d9
+    image_id: bb02b1a3-bc77-4d17-ab5b-421d89850fca
   run_list:
   - recipe[omnibus_ohai_solo::apt]
   - recipe[apt]
-- name: ubuntu-1304
-  driver_config:
-    image_id: 4b54f5a0-137f-4751-8e7c-fe707185e531
-  run_list:
-  - recipe[omnibus_ohai_solo::apt]
-  - recipe[apt]
-- name: ubuntu-1210
-  driver_config:
-    image_id: d45ed9c5-d6fc-4c9d-89ea-1b3ae1c83999
-  run_list:
-  - recipe[omnibus_ohai_solo::apt]
-  - recipe[apt]
+  attributes:
+    omnibus:
+      ruby_version: '2.1.2'
 - name: ubuntu-1204
   driver_config:
     image_id: 80fbcb55-b206-41f9-9bc2-2dd7aac6c061
