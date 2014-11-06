@@ -119,3 +119,6 @@ suites:
       ref: <%= ENV['OHAI_PLUGINS_VERSION'] || "HEAD" %>
     rackspacecloud:
       fog_version: "1.22.0"
+    xml:
+      nokogiri:
+        version: "1.6.2"
