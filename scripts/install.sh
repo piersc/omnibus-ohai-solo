@@ -156,7 +156,10 @@ case $platform in
     esac
     ;;
   "el")
-    platform_version=$major_version
+    case $major_version in
+      "7") platform_version="6";;
+      *) platform_version=$major_version;;
+    esac
     ;;
   "debian")
     case $major_version in
@@ -387,7 +390,7 @@ install_file() {
   case "$1" in
     "rpm")
       echo "installing with rpm..."
-      rpm -Uvh --oldpackage --replacepkgs "$2"
+      rpm -Uvh --nodeps --oldpackage --replacepkgs "$2"
       ;;
     "deb")
       echo "installing with dpkg..."
