@@ -121,4 +121,4 @@ suites:
       fog_version: "1.22.0"
     xml:
       nokogiri:
-        version: "1.6.2"
+        version: "1.6.1"
