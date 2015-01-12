@@ -349,7 +349,7 @@ do_checksum() {
 do_format_metadata() {
 
   # Reformat metadata file for easier Bash parsing
-  `tr , '\n' < $1|sed 's/[{,},"]//g'|sed 's/:/ /g' > $2 && cat $2 > $1 && rm $2`
+  `tr , '\n' < $1|sed 's/^ //g'|sed 's/[{,},"]//g'|sed 's/:/ /g' > $2 && cat $2 > $1 && rm $2`
 }
 
 # do_download URL FILENAME
@@ -428,8 +428,12 @@ if test "x$TMPDIR" = "x"; then
 else
   tmp=$TMPDIR
 fi
+
+# Remove any old install directories
+rm -rf $tmp/ohai_solo_install.sh*
+
 # secure-ish temp dir creation without having mktemp available (DDoS-able but not expliotable)
-tmp_dir="$tmp/install.sh.$$"
+tmp_dir="$tmp/ohai_solo_install.sh.$$"
 (umask 077 && mkdir $tmp_dir) || exit 1
 
 metadata_filename="$tmp_dir/metadata.txt"
@@ -494,4 +498,3 @@ install_file $filetype "$download_filename"
 if test "x$tmp_dir" != "x"; then
   rm -r "$tmp_dir"
 fi
-
