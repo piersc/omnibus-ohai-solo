@@ -383,6 +383,23 @@ do_download() {
   unable_to_retrieve_package
 }
 
+tar_unpack() {
+  tarfile = "$1"
+  if test -d ~rack; then
+    workdir=~rack/rs-automations
+    tar -C "$workdir" -zxvvf "$tarfile"||report_bug
+    cat > "$workdir/ohai-solo/bin/ohai-solo" << HEREDOC
+#!
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$workdir/ohai-solo/embedded/lib/
+export GEM_PATH=\$GEM_PATH:$workdir/ohai-solo/embedded/lib/ruby/site_ruby/2.1.0/
+export RUBYLIB=\$RUBYLIB:$workdir/ohai-solo/embedded/lib/ruby/2.1.0/:/home/rack/rs-automations/ohai-solo/embedded/lib/ruby/2.1.0/x86_64-linux
+$workdir/ohai-solo/bin/ohai -d $workdir/ohai-solo/plugins
+HEREDOC
+    sed -i "s:#!/opt/ohai-solo/embedded/bin/ruby:#!$workdir/ohai-solo/embedded/bin/ruby:" "$workdir/ohai-solo/bin/ohai"
+  else
+    tar -C /opt -zxvvf "$tarfile"||report_bug
+  fi
+}
 # install_file TYPE FILENAME
 # TYPE is "rpm", "deb", "solaris", or "sh"
 install_file() {
@@ -408,6 +425,9 @@ install_file() {
       echo "installing with sh..."
       sh "$2"
       ;;
+    "gz" )
+      echo "Unpacking .tar.gz..."
+      tar_unpack "$2"
     *)
       echo "Unknown filetype: $1"
       report_bug
