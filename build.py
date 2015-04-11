@@ -21,8 +21,15 @@ release_env = os.getenv('OHAI_SOLO_RELEASE_ENV', 'latest')
 ohai_solo_version = os.getenv('OHAI_SOLO_VERSION')
 if not ohai_solo_version:
     os.environ['OHAI_SOLO_VERSION'] = 'master'
+    ohai_solo_version = 'master'
 
 # Run omnibus build command
+print('#####################################################\n'
+      'Running Omnibus build:\n'
+      'Environment: %s \n'
+      'Version: %s \n'
+      'Pkg Ext: %s \n' % (release_env, str(ohai_solo_version), pkg_ext))
+
 build_cmd = shlex.split("bundle exec omnibus build ohai-solo "
                         "-o=use_git_caching:false -l debug")
 
@@ -37,55 +44,54 @@ package = glob.glob(pkgdir + '*' + pkg_ext)[0]
 meta = open(metafile).read()
 meta = json.loads(meta)
 
-# unpack package
-if 'redhat' in dist or 'centos' in dist:
-    unpack = subprocess.Popen("rpm2cpio %s|cpio -i" % package,
-    		              stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                              shell=True)
-if 'debian' in dist or 'Ubuntu' in dist:
-    unpack = subprocess.Popen(['dpkg', '--unpack', package],
-                              stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                              shell=False)
-unpack.wait()
-   
 # pack into a tar.gz
-name = "%s-%s-%s-%s%s-%s.tar.gz" % (meta['name'], meta['version'],
-                                    meta['iteration'], meta['platform'],
-                                    meta['platform_version'], meta['arch'])
-pkgpath = os.path.join(pkgdir, name)
+tar_name = "%s-%s-%s-%s.tar.gz" % (meta['name'], meta['version'],
+                               meta['iteration'], meta['arch'])
+
+print('#####################################################\n'
+      'Creating tar.gz from package:\n'
+      'Package: %s \n'
+      'Metadata File: %s \n'
+      'Tar: %s \n' % (package, metafile, tar_name))
+
+pkgpath = os.path.join(pkgdir, tar_name)
 if dist in ['redhat', 'centos']:
     tar_cwd = './opt'
 elif dist in ['debian', 'Ubuntu']:
     tar_cwd = '/opt/'
 
 pack = subprocess.Popen(['tar', '-czf', pkgpath, 'ohai-solo/'],
-			stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-			shell=False, cwd=tar_cwd)
+                        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                        shell=False, cwd=tar_cwd)
 pack.stdout.readlines()
 pack.wait()
 
 # Update metadata variables
-meta['basename'] = name
-with open(pkgpath, 'r') as read_fd:
-    md5 = hashlib.md5()
-    sha1 = hashlib.sha1()
-    sha256 = hashlib.sha256()
-    sha512 = hashlib.sha512()
-    while True:
-        data = read_fd.read(2048)
-        if not data:
-            break
-        md5.update(data)
-        sha1.update(data)
-        sha256.update(data)
-        sha512.update(data)
+tar_path = os.path.join(pkgdir, tar_name)
+tar_meta = meta.copy()
+tar_meta['basename'] = tar_name
 
-    meta['md5'] = md5.hexdigest()
-    meta['sha1'] = sha1.hexdigest()
-    meta['sha256'] = sha256.hexdigest()
-    meta['sha512'] = sha512.hexdigest()
+with open(tar_path, 'r') as read_fd:
+    data = read_fd.read()
+    md5 = hashlib.md5(data)
+    sha1 = hashlib.sha1(data)
+    sha256 = hashlib.sha256(data)
+    sha512 = hashlib.sha512(data)
 
-# Write index file
-latest = "%s.%s.%s.%s.json" % (release_env, meta['platform'], meta['platform_version'], meta['arch']) 
+tar_meta['md5'] = md5.hexdigest()
+tar_meta['sha1'] = sha1.hexdigest()
+tar_meta['sha256'] = sha256.hexdigest()
+tar_meta['sha512'] = sha512.hexdigest()
+
+# Write package index file
+latest = "%s.%s.%s.%s.json" % (release_env, meta['platform'],
+                               meta['platform_version'], meta['arch'])
 with open(os.path.join(pkgdir, latest), 'w') as outfile:
     json.dump(meta, outfile)
+
+# Write tar index file
+tar_latest = "%s.%s.%s.%s.tar.json" % (release_env, tar_meta['platform'],
+                                   tar_meta['platform_version'],
+                                   tar_meta['arch'])
+with open(os.path.join(pkgdir, tar_latest), 'w') as outfile:
+    json.dump(tar_meta, outfile)
