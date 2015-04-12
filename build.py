@@ -55,10 +55,7 @@ print('#####################################################\n'
       'Tar: %s \n' % (package, metafile, tar_name))
 
 pkgpath = os.path.join(pkgdir, tar_name)
-if dist in ['redhat', 'centos']:
-    tar_cwd = './opt'
-elif dist in ['debian', 'Ubuntu']:
-    tar_cwd = '/opt/'
+tar_cwd = '/opt/'
 
 pack = subprocess.Popen(['tar', '-czf', pkgpath, 'ohai-solo/'],
                         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
