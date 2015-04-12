@@ -10,7 +10,7 @@ import hashlib
 arch = platform.machine()
 dist, version, rel = platform.dist()
 
-if 'redhat' in dist or 'centos' in dist:
+if dist.lower() in ['redhat', 'centos']:
     pkg_ext = '.rpm'
 else:
     pkg_ext = '.deb'
@@ -45,8 +45,14 @@ meta = open(metafile).read()
 meta = json.loads(meta)
 
 # pack into a tar.gz
-tar_name = "%s-%s-%s-%s.tar.gz" % (meta['name'], meta['version'],
-                               meta['iteration'], meta['arch'])
+if dist.lower() in ['ubuntu', 'debian']:
+    tar_name = "%s-%s-%s-%s.tar.gz" % (meta['name'], meta['version'],
+                                   meta['iteration'], meta['arch'])
+else:
+    tar_name = "%s-%s-%s-%s%s.%s.tar.gz" % (meta['name'], meta['version'],
+                                            meta['iteration'], meta['platform'],
+                                            meta['platform_version'],
+                                            meta['arch'])
 
 print('#####################################################\n'
       'Creating tar.gz from package:\n'
