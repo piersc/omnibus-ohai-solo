@@ -50,15 +50,17 @@ report_bug() {
 }
 
 # Get command line arguments
-while getopts f:d: opt
+while getopts f:d:ti: opt
 do
   case "$opt" in
 
     f)  cmdline_filename="$OPTARG";;
     d)  cmdline_dl_dir="$OPTARG";;
+    t)  cmdline_tar="true";;
+    i)  cmdline_install_dir="$OPTARG";;
     \?)   # unknown flag
       echo >&2 \
-      "usage: $0 [-f filename | -d download_dir]"
+      "usage: $0 [-f filename | -d download_dir| -t (tar install)| -i tar_install_dir]"
       exit 1;;
   esac
 done
@@ -384,21 +386,24 @@ do_download() {
 }
 
 tar_unpack() {
-  tarfile = "$1"
-  if test -d ~rack; then
-    workdir=~rack/rs-automations
-    tar -C "$workdir" -zxvvf "$tarfile"||report_bug
-    cat > "$workdir/ohai-solo/bin/ohai-solo" << HEREDOC
+  tarfile="$1"
+  echo "Running tar install. Extracting $tarfile into $cmdline_install_dir"
+  if test ! -d $cmdline_install_dir; then
+    mkdir -p $cmdline_install_dir
+  fi
+
+  workdir=$cmdline_install_dir
+  tar -C "$workdir" -zxvvf "$tarfile"||report_bug
+
+  cat > "$workdir/ohai-solo/bin/ohai-solo" << HEREDOC
 #!
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$workdir/ohai-solo/embedded/lib/
 export GEM_PATH=\$GEM_PATH:$workdir/ohai-solo/embedded/lib/ruby/site_ruby/2.1.0/
 export RUBYLIB=\$RUBYLIB:$workdir/ohai-solo/embedded/lib/ruby/2.1.0/:/home/rack/rs-automations/ohai-solo/embedded/lib/ruby/2.1.0/x86_64-linux
 $workdir/ohai-solo/bin/ohai -d $workdir/ohai-solo/plugins
 HEREDOC
-    sed -i "s:#!/opt/ohai-solo/embedded/bin/ruby:#!$workdir/ohai-solo/embedded/bin/ruby:" "$workdir/ohai-solo/bin/ohai"
-  else
-    tar -C /opt -zxvvf "$tarfile"||report_bug
-  fi
+
+  sed -i "s:#!/opt/ohai-solo/embedded/bin/ruby:#!$workdir/ohai-solo/embedded/bin/ruby:" "$workdir/ohai-solo/bin/ohai"
 }
 # install_file TYPE FILENAME
 # TYPE is "rpm", "deb", "solaris", or "sh"
@@ -428,6 +433,7 @@ install_file() {
     "gz" )
       echo "Unpacking .tar.gz..."
       tar_unpack "$2"
+      ;;
     *)
       echo "Unknown filetype: $1"
       report_bug
@@ -458,7 +464,22 @@ tmp_dir="$tmp/ohai_solo_install.sh.$$"
 
 metadata_filename="$tmp_dir/metadata.txt"
 
-metadata_url="${download_domain}/latest.${platform}.${platform_version}.${machine}.json"
+tar_install='false'
+
+if test "x$cmdline_tar" != "x"; then
+  if test "x$cmdline_install_dir" != "x"; then
+    tar_install='true'
+  else
+    echo -e "You must use '-i' to specify an install directory\nwhen using tar based installs."
+    exit 1
+  fi
+fi
+
+if test "x$tar_install" = 'xfalse'; then
+  metadata_url="${download_domain}/latest.${platform}.${platform_version}.${machine}.json"
+else
+  metadata_url="${download_domain}/latest.${platform}.${platform_version}.${machine}.tar.json"
+fi
 
 if test "x$platform" = "xsolaris2"; then
   if test "x$platform_version" = "x5.9" -o "x$platform_version" = "x5.10"; then
